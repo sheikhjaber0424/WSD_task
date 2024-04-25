@@ -16,7 +16,7 @@ function findMinIndex(array) {
 function calculateTime(q, tapFlows, walkingTime) {
 
     let tapTimes = Array(tapFlows.length).fill(0);
-    let val = 0;
+
     q.forEach((bottle_size, i) => {
 		
 		let minIndex = findMinIndex(tapTimes);
@@ -25,8 +25,6 @@ function calculateTime(q, tapFlows, walkingTime) {
 
         let timeSpentFillingBottle = bottle_size / flow;
 
-        val = val + 1;
- 
         tapTimes[minIndex] += timeSpentFillingBottle + walkingTime;
     });
   

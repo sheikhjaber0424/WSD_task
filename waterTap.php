@@ -44,6 +44,6 @@ $flowRatesExample = [50, 200];
 
 echo '-----';
 echo "\n";
-echo calculateTime($queueExample, $flowRatesExample, 0);
+echo calculateTime($queueExample, $flowRatesExample, $walkTimeExample);
 echo "\n";
 echo '-----';

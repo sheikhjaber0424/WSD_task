@@ -1,7 +1,5 @@
 <?php
-
-// Define a function that we'll need to use later
-// This function works exactly the same way as the "min" function, except it returns the INDEX of the value which is minimum, not the VALUE of the value which is minimum
+// Finds the index of the element with the minimum value in an array.
 function findMinIndex($array)
 {
     $minIndex = null;
@@ -15,21 +13,29 @@ function findMinIndex($array)
     return $minIndex;
 }
 
+// Calculates the total time to fill a queue of bottles
 function calculateTime($q, $tapFlows, $walkingTime)
 {
+    // Initialize an array to store the current filling time for each tap
     $tapTimes = array_fill(0, count($tapFlows), 0);
 
     foreach ($q as $i => $bottleSize) {
 
+        // Finds the tap with the shortest current filling time
         $minIndex = findMinIndex($tapTimes);
 
+        // Gets the flow rate of the chosen tap
         $flow = $tapFlows[$minIndex];
 
+        // Calculates the time to fill the current bottle
         $timeSpentFillingBottle = $bottleSize / $flow;
 
+        // Updates the total filling time including walking time
         $tapTimes[$minIndex] += $timeSpentFillingBottle + $walkingTime;
     }
 
+
+    // The total time is the maximum filling time among all taps
     $totalTime = max($tapTimes);
 
     return $totalTime;

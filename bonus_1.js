@@ -1,4 +1,4 @@
-// Finds the index of the element with the minimum value in an array.
+
 function findMinIndex(array) {
     let minIndex = null;
     let minValue = null;
@@ -11,29 +11,32 @@ function findMinIndex(array) {
     return minIndex;
 }
 
-// Calculates the total time to fill a queue of bottles
 function calculateTime(q, tapFlows, walkingTime) {
 
-    // Initialize an array to store the current filling time for each tap
     let tapTimes = Array(tapFlows.length).fill(0);
+    let val = 0;
 
     q.forEach((bottle_size, i) => {
 		
-        // Finds the tap with the shortest current filling time
 		let minIndex = findMinIndex(tapTimes);
 
-        // Gets the flow rate of the chosen tap
         let flow = tapFlows[minIndex];
 
-        // Calculates the time to fill the current bottle
         let timeSpentFillingBottle = bottle_size / flow;
 
-        // Updates the total filling time including walking time
-        tapTimes[minIndex] += timeSpentFillingBottle + walkingTime;
-    });
+        val +=1;
 
-    // The total time is the maximum filling time among all taps
-    return Math.max(...tapTimes);
+        if(val > tapFlows.length)
+        {
+            tapTimes[minIndex] += timeSpentFillingBottle + walkingTime;
+        } else {
+            // $walkingTime not added for initial people, when the val > tapFlows.length the person is not at the initial position of queue.
+            tapTimes[minIndex] += timeSpentFillingBottle ;
+        }
+       
+    });
+  
+return Math.max(...tapTimes);
 }
 
 let queueExample = [400, 750, 1000];

@@ -1,7 +1,5 @@
 <?php
 
-// Define a function that we'll need to use later
-// This function works exactly the same way as the "min" function, except it returns the INDEX of the value which is minimum, not the VALUE of the value which is minimum
 function findMinIndex($array)
 {
     $minIndex = null;
@@ -28,11 +26,12 @@ function calculateTime($q, $tapFlows, $walkingTime)
 
         $timeSpentFillingBottle = $bottleSize / $flow;
 
-        $val = $val + 1;
+        $val += 1;
 
         if ($val > count($tapFlows)) {
             $tapTimes[$minIndex] += $timeSpentFillingBottle + $walkingTime;
         } else {
+            // $walkingTime not added for initial people, when the val > tapFlows.length the person is not at the initial position of queue.
             $tapTimes[$minIndex] += $timeSpentFillingBottle;
         }
     }

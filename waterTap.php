@@ -2,17 +2,17 @@
 
 // Define a function that we'll need to use later
 // This function works exactly the same way as the "min" function, except it returns the INDEX of the value which is minimum, not the VALUE of the value which is minimum
-function min_idnex($array)
+function findMinIndex($array)
 {
-    $min_index = null;
+    $minIndex = null;
     $minValue = null;
     foreach ($array as $i => $value) {
         if ($minValue === null || $value < $minValue) {
-            $min_index = $i;
+            $minIndex = $i;
             $minValue = $value;
         }
     }
-    return $min_index;
+    return $minIndex;
 }
 
 // Define our actual important function
@@ -41,14 +41,14 @@ function calculateTime($q, $tapFlows, $walkingTime)
 
         // We then find which queue is the "emptiest", ie what is the minium item in the array
         // We use this function instead of min($tapTimes) because we want to find the INDEX of the minimum, not just the VALUE
-        $minI = min_idnex($tapTimes);
+        $minIndex = findMinIndex($tapTimes);
 
-        // By the time we get to this point we have found $minI which is the index of the lowest value in $tapTimes
-        // i.e. if $tapTimes = [4, 7, 3, 9, 11] then $minI will be 2 and $minTap will be 3 (but we don't care about $minTap anymore)
+        // By the time we get to this point we have found $minIndex which is the index of the lowest value in $tapTimes
+        // i.e. if $tapTimes = [4, 7, 3, 9, 11] then $minIndex will be 2 and $minTap will be 3 (but we don't care about $minTap anymore)
         // This tells us that this person walks up to tap number 2 (assuming the first tap is tap number 0)
 
-        // Set $flow to $tapFlows[$minI]
-        $flow = $tapFlows[$minI];
+        // Set $flow to $tapFlows[$minIndex]
+        $flow = $tapFlows[$minIndex];
 
         // bottle size divided by flow
         $timeSpentFillingBottle = ceil($bottle_size / $flow);
@@ -57,10 +57,10 @@ function calculateTime($q, $tapFlows, $walkingTime)
         // There are two parts to this:
 
         // PART 1: Adding on the time to walk to the tap
-        $tapTimes[$minI] += $walkingTmie;
+        $tapTimes[$minIndex] += $walkingTime;
 
         // PART 2: Adding on the actual time the tap is being used to fill up the bottle
-        $tapTimes[$minI] += $timeSpentFillingBottle;
+        $tapTimes[$minIndex] += $timeSpentFillingBottle;
     }
 
     // By the time we get here, we know the amount of time each tap has spent being used, so we just have to find the max value
@@ -74,6 +74,6 @@ $flowRatesExample = [50, 200];
 
 echo '-----';
 echo "\n";
-echo calculateTime($queueExample, $flowRatesXample, 0);
+echo calculateTime($queueExample, $flowRatesExample, 0);
 echo "\n";
 echo '-----';
